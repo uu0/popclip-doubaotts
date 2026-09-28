@@ -1,0 +1,35 @@
+name: Build and release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build .popclipextz
+        run: |
+          set -euo pipefail
+          # 绝不把 __pycache__ 打进包
+          find DoubaoSay.popclipext -name '__pycache__' -type d -prune -exec rm -rf {} +
+          VERSION="${GITHUB_REF_NAME#v}"
+          # zip 必须包含 .popclipext 文件夹（不能平铺），且基名与文件夹名一致，
+          # 否则 PopClip 安装时报 "Failed to unzip extension"
+          zip -qr "DoubaoSay-${VERSION}.popclipextz" DoubaoSay.popclipext
+          ls -la *.popclipextz
+          unzip -l "DoubaoSay-${VERSION}.popclipextz" | head -20
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: DoubaoSay-*.popclipextz
+          generate_release_notes: true

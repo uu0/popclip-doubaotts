@@ -1,0 +1,60 @@
+{
+  "description": "用火山引擎豆包语音合成朗读选中文本（WebSocket V3）。首次使用请在下方设置中填写 API Key（火山引擎控制台开通语音合成服务后获取）。",
+  "icon": "icon.png",
+  "identifier": "com.github.uu0.popclip.extension.doubaotts",
+  "interpreter": "zsh",
+  "keywords": "doubao tts speak voice 朗读",
+  "name": "豆包朗读",
+  "options": [
+    {
+      "description": "火山引擎语音合成的 API Key。填写后优先使用；留空则回落到钥匙串（service popclip-doubaotts，account api_key）。",
+      "identifier": "apiKey",
+      "label": "API Key",
+      "secret": true,
+      "type": "string"
+    },
+    {
+      "description": "朗读使用的音色（均为 seed-tts-2.0 可用音色）。",
+      "identifier": "voice",
+      "label": "音色",
+      "type": "multiple",
+      "value labels": [
+        "爽快思思 2.0（默认）",
+        "知性灿灿 2.0",
+        "小何 2.0",
+        "Vivi 2.0",
+        "邻家女孩 2.0",
+        "亲切女声 2.0",
+        "儿童绘本 2.0",
+        "温暖阿虎 2.0（男声）",
+        "云舟 2.0（男声）",
+        "深夜播客 2.0（男声）",
+        "儒雅逸辰 2.0（男声）",
+        "阳光青年 2.0（男声）"
+      ],
+      "values": [
+        "zh_female_shuangkuaisisi_uranus_bigtts",
+        "zh_female_cancan_uranus_bigtts",
+        "zh_female_xiaohe_uranus_bigtts",
+        "zh_female_vv_uranus_bigtts",
+        "zh_female_linjianvhai_uranus_bigtts",
+        "zh_female_qinqienv_uranus_bigtts",
+        "zh_female_xiaoxue_uranus_bigtts",
+        "zh_male_wennuanahu_uranus_bigtts",
+        "zh_male_m191_uranus_bigtts",
+        "zh_male_shenyeboke_uranus_bigtts",
+        "zh_male_ruyayichen_uranus_bigtts",
+        "zh_male_yangguangqingnian_uranus_bigtts"
+      ]
+    },
+    {
+      "description": "语速倍率，如 1.0。留空为 1.0。",
+      "identifier": "speed",
+      "label": "语速",
+      "type": "string"
+    }
+  ],
+  "popclipVersion": 4069,
+  "shellScriptFile": "doubao_say.zsh",
+  "stdin": "text"
+}
